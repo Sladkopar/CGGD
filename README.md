@@ -35,3 +35,16 @@ cmake ..
 - [Cube model](https://casual-effects.com/g3d/data10/index.html#) by Morgan McGuire (CC BY 3.0 License)
 - [Teapot model](https://casual-effects.com/g3d/data10/common/model/teapot/teapot.zip) by Martin Newell (CC0 License)
 - [Dabrovic Sponza model](https://casual-effects.com/g3d/data10/index.html#) by Marko Dabrovic (CC BY-NC License)
+
+
+## Performance data
+
+### Clearing
+
+| Num of pixels | Clear time |
+|:-------------:|:----------:|
+| 100x100       | 0.116ms    |
+| 1000x100      | 1.173ms    |
+| 1000x1000     | 11.832ms   |
+| 1000x10000    | 114.065ms  |
+| FullHD        | 23.008ms   |
