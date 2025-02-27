@@ -50,12 +50,21 @@ void cg::renderer::rasterization_renderer::render()
 		camera->get_view_matrix(),
 		model->get_world_matrix()
 	);
+
+	// using namespace linalg::ostream_overloads;
+	// std::cout << camera->get_projection_matrix() << "\n";
+	// std::cout << camera->get_view_matrix() << "\n";
+
 	rasterizer->vertex_shader = [&](float4 vertex, cg::vertex vertex_data) {
 		float4 processed = mul(matrix, vertex);
+		// using namespace linalg::ostream_overloads;
+		// std::cout << vertex << "\n";
 		return std::make_pair(processed, vertex_data);
 	};
 
-
+	rasterizer->pixel_shader = [](cg::vertex vertex_data, float z){
+		return cg::color::from_float3(vertex_data.ambient);
+	};
 
 	auto start = std::chrono::high_resolution_clock::now();
 	
@@ -65,7 +74,6 @@ void cg::renderer::rasterization_renderer::render()
 	std::chrono::duration<float, std::milli> duration = stop - start;
 	std::cout << "Clearing took " << duration.count() << "ms\n";
 
-	// TODO Lab: 1.04 Implement `vertex_shader` lambda for the instance of `cg::renderer::rasterizer`
 	// TODO Lab: 1.05 Implement `pixel_shader` lambda for the instance of `cg::renderer::rasterizer`
 	
 	for (size_t shape_id=0; shape_id < model->get_index_buffers().size(); shape_id++)
