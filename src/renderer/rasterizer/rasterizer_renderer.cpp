@@ -54,14 +54,12 @@ void cg::renderer::rasterization_renderer::render()
 		model->get_world_matrix()
 	);
 
-	// using namespace linalg::ostream_overloads;
-	// std::cout << camera->get_projection_matrix() << "\n";
-	// std::cout << camera->get_view_matrix() << "\n";
+	using namespace linalg::ostream_overloads;
+	std::cout << camera->get_projection_matrix() << "\n";
+	std::cout << camera->get_view_matrix() << "\n";
 
 	rasterizer->vertex_shader = [&](float4 vertex, cg::vertex vertex_data) {
 		float4 processed = mul(matrix, vertex);
-		// using namespace linalg::ostream_overloads;
-		// std::cout << vertex << "\n";
 		return std::make_pair(processed, vertex_data);
 	};
 
@@ -85,6 +83,7 @@ void cg::renderer::rasterization_renderer::render()
 			model->get_index_buffers()[shape_id]->count(),
 			0
 		);
+		std::cout << "Shape: " << shape_id << "\n";
 	}
 	
 	cg::utils::save_resource(*render_target, settings->result_path);
