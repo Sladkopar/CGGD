@@ -28,10 +28,10 @@ void cg::renderer::dx12_renderer::init()
 	camera->set_z_near(settings->camera_z_near);
 	camera->set_z_far(settings->camera_z_far);
 
-	view_port = CD3DX12_VIEWPORT(0.f, 0.f, static_cast<float>(settings->width, 
-		static_cast<float>(settings->height));
-	scissor_rect = CD3DX12_RECT(0, 0, 
-		static_cast<LONG>(settings->width, static_cast<LONG>(settings->height));
+	view_port = CD3DX12_VIEWPORT(0.f, 0.f,
+		static_cast<float>(settings->width), static_cast<float>(settings->height));
+	scissor_rect = CD3DX12_RECT(0, 0,
+		static_cast<LONG>(settings->width), static_cast<LONG>(settings->height));
 	
 	load_pipeline();
 	load_assets();
